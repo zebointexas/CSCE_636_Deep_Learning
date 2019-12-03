@@ -1,0 +1,28 @@
+Introduction
+**************************************
+During the past decades, machine learning models, such as Artificial Neural Networks (ANNs) and the Support Vector Regression (SVR), have been widely used to predict financial time series and gain high predictive accuracy. There are three main deep learning approaches widely used in studies: convolutional neural networks, deep belief networks and stacked autoencoders. In our class project, we use the model based on the stacked autoencoders approach to predict the stock market.
+
+Model
+**************************************
+Stacked Autoencoders (SAEs) is the main part of the model and is used to learn the deep features of financial time series in an unsupervised manner. It is a neural network consisting of multiple single layer autoencoders in which the output feature of each layer is wired to the inputs of the successive layer. The unsupervised training of SAEs is done one AE at a time by minimizing the error between the output data and the input data. As a result, the SAEs model can successfully learn invariant and abstract features.
+
+Another two methdod, wavelet transforms (WT) and long-short term memory (LSTM) are incorporated to help increase predictive accuracy. First, LSTM is a type of recurrent neural network (RNN), with feedback links attached to some layers of the network. Unlike conventional RNN, it is well-suited to learn from experience to predict time series when there are time steps with arbitrary size. In addition, it can solve the problem of a vanishing gradient by having the memory unit retain the time related information for an arbitrary amount of time. LSTM is more effective than the conventional RNN. Second, WT is considered to fix the noise feature of financial time series. It is a widely used technique for filtering and mining single-dimensional signals. We use it to denoise the input financial time series and then feed them into the deep learning framework.  
+
+Input Data
+**************************************
+We select six stock indices to test the prediction ability of the proposed model. Those indices include both developed and deveoping  markets (such as Indian, Hong Kong and New York). We apply our model to forecast the movements of each stock index and check how well our model is in predicting stock moving trends.
+ 
+Three types of variables are used as model inputs.
+1. Historical stock trading data, such as the Open, High, Low and Close price.
+2. The technical indicators of stock trading. These are commonly used inputs in previous studies
+3. Macroeconomic variables. As the macro economy can hugely influence stock markets and the advantage of our deep learning model is the ability to extract abstract and invariant features from input variables, we believe the addition of macroeconomic variables could improve the model performance.
+
+We evaluate the model’s performance from two dimensions - predictive accuracy and profitability.
+1. The predictive accuracy is evaluated by using three measurements: Mean absolute percentage error (MAPE), correlation coefficient (R) and Theil’s inequality coefficient (Theil U). All of them are widely used indicators to measure whether the predicted value is similar to the actual value
+2. To check the profitability, we establish a buy-and-sell trading strategy. The strategy is applied to obtain the trading returns based on the predicted outcomes from the model. As a benchmark, we also compute the returns of a buy-and-hold strategy for each stock index. The basic idea is that whether the trading returns based on our model can outperform the returns of this simple trading strategy, which provides further evidence for the model’s profitability.
+ 
+Data are collected from WIND database provided by Shanghai Wind Information Co., Ltd, CSMAR database provided by Shenzhen GTA Education Tech. Ltd and a global financial portal: Investing.com. It consists of around 8 years of data from Jul. 2008 to Sep. 2016. Our results show that WSAEs-LSTM outperforms the other three models not only in predictability but also in profitability.
+
+Evaluation
+**************************************
+We introduced other three models and evaluate their predictive accuracy and profitability in forecasting each stock index as the comparisons against our proposed model. 1. a combination of WT and LSTM) 2. LSTM and  3. the conventional RNN (used as the performance benchmark).  
