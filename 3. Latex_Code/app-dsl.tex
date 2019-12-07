@@ -1,0 +1,67 @@
+In this appendix, we provide more details about the list DSL that \scheme\ uses to generate programs.  Our list DSL has only two implicit data types, integer and list of integer.  A program in this DSL is a sequence of statements, each of which is a call to one of the 41 functions defined in the DSL.  There are no explicit variables, nor conditionals, nor explicit control flow operations in the DSL, although many of the functions in the DSL are high-level and contain implicit conditionals and control flow within them.  Each of the 41 functions in the DSL takes one or two arguments, each being of integer or list of integer type, and returns exactly one output, also of integer or list of integer type.  Given these rules, there are 10 possible function signatures.  However, only 5 of these signatures occur for the functions we chose to be part of the DSL.  The following sections are broken down by the function signature, wherein all the functions in the DSL having that signature are described.
+
+Instead of named variables, each time a function call requires an argument of a particular type, our DSL's runtime searches backwards and finds the most recently executed function that returns an output of the required type and then uses that output as the current function's input.  Thus, for the first statement in the program, there will be no previous function's output from which to draw the arguments for the first function.  When there is no previous output of the correct type, then our DSL's runtime looks at the arguments to the program itself to provide those values.  Moreover, it is possible for the program's inputs to not provide a value of the requested type.  In such cases, the runtime provides a default value for missing inputs, 0 in the case of integer and an empty list in the case of list of integer.  For example, let us say that a program is given a list of integer as input and that the first three functions called in the program each consume and produce a list of integer.  Now, let us assume that the fourth function called takes an integer and a list of integer as input.  The list of integer input will use the list of integer output from the previous function call.  The DSL runtime will search backwards and find that none of the previous function calls produced integer output and that no integer input is present in the program's inputs either.  Thus, the runtime would provide the value 0 as the integer input to this fourth function call.  The final output of a program is the output of the last function called.
+
+Thus, our language is defined in such a way that so long as the program consists only of calls to one of the 41 functions provided by the DSL, that these programs are valid by construction. 
+Each of the 41 functions is guaranteed to finish in a finite time and there are no looping constructs in the DSL and thus programs in our DSL are guaranteed to finish.  This property allows our system to not have to monitor the programs that they execute to detect potentially infinite loops.  Moreover, so long as the implementations of those 41 functions are secure and have no potential for memory corruption then programs in our DSL are similarly guaranteed to be secure and not crash and thus we do not require any sand-boxing techniques.  When our system performs crossover between two candidate programs, any arbitrary cut points in both of the parent programs will result in a child program that is also valid by construction.  Thus, our system need not test that programs created via crossover or mutation are valid.
+
+In the following sections, \emph{[]} is used to indicate the type list of integer whereas \emph{int} is used to indicate the integer type.  The type after the arrow is used to indicate the output type of the function.
+
+\subsection{Functions with the signature $\emph{[]} \rightarrow \emph{int}$}
+There are 9 functions in our DSL that take a list of integer as input and return an integer as output.
+\subsubsection{HEAD (Function 6)}
+This function returns the first item in the input list.  If the list is empty, a 0 is returned.
+\subsubsection{LAST (Function 7)}
+This function returns the last item in the input list.  If the list is empty, a 0 is returned.
+\subsubsection{MINIMUM (Function 8)}
+This function returns the smallest integer in the input list.  If the list is empty, a 0 is returned.
+\subsubsection{MAXIMUM (Function 9)}
+This function returns the largest integer in the input list.  If the list is empty, a 0 is returned.
+\subsubsection{SUM (Function 11)}
+This functions returns the sum of all the integers in the input list.  If the list is empty, a 0 is returned.
+\subsubsection{COUNT (Function 2-5)}
+This function returns the number of items in the list that satisfy the criteria specified by the additional lambda.  Each possible lambda is counted as a different function.  Thus, there are 4 COUNT functions having lambdas: >0, <0, odd, even.
+
+\subsection{Functions with the signature $\emph{[]} \rightarrow \emph{[]}$}
+There are 21 functions in our DSL that take a list of integer as input and produce a list of integer as output.
+\subsubsection{REVERSE (Function 29)}
+This function returns a list containing all the elements of the input list but in reverse order.
+\subsubsection{SORT (Function 35)}
+This function returns a list containing all the elements of the input list in sorted order.
+\subsubsection{MAP (Function 19-28)}
+This function applies a lambda to each element of the input list and creates the output list from the outputs of those lambdas.  Let $I_n$ be the nth element of the input list to MAP and let $O_n$ be the nth element of the output list from Map.  MAP produces an output list such that $O_n$=lambda($I_n$) for all n.  There are 10 MAP functions corresponding to the following lambdas: +1,-1,*2,*3,*4,/2,/3,/4,*(-1),\^{}2.
+\subsubsection{FILTER (Function 14-17)}
+This function returns a list containing only those elements in the input list satisfying the criteria specified by the additional lambda.  Ordering is maintained in the output list relative to the input list for those elements satisfying the criteria.  There are 4 FILTER functions having the lambdas: >0, <0, odd, even.
+\subsubsection{SCANL1 (Function 30-34)}
+Let $I_n$ be the nth element of the input list to SCANL1 and let $O_n$ be the nth element of the output list from SCANL1.  This function produces an output list as follows:
+
+\[ \begin{cases} 
+      $O\_n$=$I\_n$ & $n$==$0$ \\
+      $O\_n$=lambda($I\_n$,$O\_{n-1}$) & $n$>$0$ 
+   \end{cases}
+\]
+
+There are 5 SCANL1 functions corresponding to the following lambdas: +, -, *, min, max.
+
+\subsection{Functions with the signature $\emph{int,{[]}} \rightarrow \emph{[]}$}
+There are 4 functions in our DSL that take an integer and a list of integer as input and produce a list of integer as output.
+\subsubsection{TAKE (Function 36)}
+This function returns a list consisting of the first N items of the input list where N is the smaller of the integer argument to this function and the size of the input list.
+\subsubsection{DROP (Function 13)}
+This function returns a list in which the first N items of the input list are omitted, where N is the integer argument to this function.
+\subsubsection{DELETE (Function 12)}
+This function returns a list in which all the elements of the input list having value X are omitted where X is the integer argument to this function.
+\subsubsection{INSERT (Function 18)}
+This function returns a list where the value X is appended to the end of the input list, where X is the integer argument to this function.
+
+\subsection{Functions with the signature $\emph{[],[]} \rightarrow \emph{[]}$}
+There is only one function in our DSL that takes two lists of integers and returns another list of integers.
+\subsubsection{ZIPWITH (Function 37-41)}
+This function returns a list whose length is equal to the length of the smaller input list.  Let $O_n$ be the nth element of the output list from ZIPWITH.  Moreover, let $I^1_n$ and $I^2_n$ be the nth elements of the first and second input lists respectively.  This function creates the output list such that $O_n$=lambda($I^1_n$, $I^2_n$).  There are 5 ZIPWITH functions corresponding to the following lambdas: +, -, *, min, max.
+
+\subsection{Functions with the signature $\emph{int,[]} \rightarrow \emph{int}$}
+There are two functions in our DSL that take an integer and list of integer and return an integer.
+\subsubsection{ACCESS (Function 1)}
+This function returns the Nth element of the input list, where N is the integer argument to this function.  If N is less than 0 or greater than the length of the input list then 0 is returned.
+\subsubsection{SEARCH (Function 10)}
+This function return the position in the input list where the value X is first found, where X is the integer argument to this function.  If no such value is present in the list, then -1 is returned.

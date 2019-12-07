@@ -1,0 +1,33 @@
+\subsection{Hyper parameters for evolutionary algorithm and neural network}
+\begin{itemize}
+\item{Evolutionary Algorithm:}
+    \begin{itemize}
+        \item{} Gene pool size: 100
+        \item{} Number of reserve gene in each generation: 20
+        \item{} Maximum number of generation: 30,000
+        \item{} Gene length: 4
+        \item{} Crossover rate: 40\%
+        \item{} Mutation rate: 30\%
+    \end{itemize}
+\item{Neural Network Training:}
+    \begin{itemize}
+        \item{} Loss: Categorical Cross-Entropy
+        \item{} Optimizer: Adam
+        \item{} 3 hidden layers with neurons 48, 24, 12
+        \item{} Activation function: Sigmoid in hidden layers and Softmax in output layer.
+    \end{itemize}
+
+\end{itemize}
+
+\subsection{How we generate training dataset for the neural network}
+ 
+For our two approaches ($f^{LCS}$ and $f^{FP}$), we created 3 types of data sets for 3 different models ($IO$, $IO^2$, $IO^\delta$). We used 50,000 programs as base program and to compare we chose 150 different other programs. These two sets of programs are compared with each other to get the number of common function or longest common sub-sequence between them. In each comparison we created 100 input-output examples that lead to total 750 million data points. For $IO$ model we generated our dataset from the base program but for $IO^2$ and $IO^\delta$ model we need another output that we created with the comparable program by passing the inputs. Each input or output were padded to fixed 12 dimension and  were joined together. For the $IO^\delta$ model we took absolute difference between input and corresponding two different outputs. Also add the information of dimension difference of two output. Thus for the three models input dimension were 24 ($IO$), 36 ($IO^2$), 25 ($IO^\delta$).
+
+With our training programs and given input-output examples we created our dataset. We split out the dataset into training and testing set in a ratio of 3:1. We also randomized the dataset before splitting. Data were normalized before feeding into the neural network. 
+
+
+\subsection{Training of Neural Network}
+
+We used 3 hidden layers in our model. Our models predicted common functions/longest common subsequence between the target programs and generated programs from EA by using input-output examples. We predicted that value as a classification output.
+
+For the Deepcoder model, we used 3 hidden layers with 256 neurons each. We passed the input through the embedding layer connected to the input neurons. We took average for the input-output examples and predicted function probability.

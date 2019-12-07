@@ -1,0 +1,40 @@
+Stock market prediction is usually considered as one of the most challenging issues among
+time series predictions~\cite{wang2012novel} because of its volatile properties. How to correctly predict stock movement is still an heated topic with respect to the economic and social organization. During the past decades, machine learning techniques, such as Artificial Neural Networks ~\cite{chen2014deep} and the Support Vector Regression (SVR) ~\cite{guo2014feature}, have been widely used. In the paper, however, we try to do experiments on an improved model which models complex real-world
+data by extracting robust features that capture the relevant information ~\cite{bao2017deep}. Considering the complexity of financial time series, neural network is regarded as one of the most charming topic ~\cite{bao2017deep}. However, this field still has much to explore.  
+
+Currently we have three main neural network approaches. First, convolutional neural networks. Second,  deep belief networks. Third, stacked autoencoders. Previously, the relevant methods used for finance were the former two of these. For example, Ding et al. ~\cite{ding2015deep} combine the neural tensor network
+and the deep convolutional neural network to predict the short-term and long-term influences
+of events on stock price movements. Also, certain works use deep belief networks. 
+
+However, there has been only one attempt, by Bao et al. ~\cite{bao2017deep}, that incorporates stacked autoencoders. This paper will continue to explore Bao's paper to refine the stock prediction. Bao's model has three parts: wavelet, stacked autoencoders(SAEs) and LSTM. SAEs play a main role in that model. It is used to learn the deep features of a stock price in an unsupervised way, as SAEs model can successfully learn invariant and abstract features ~\cite{chen2014deep}.
+
+After SAE is used to find the invariants, LSTM is then used to enhance the prediction accuracy. It is one of the most advanced deep learning architectures for sequential learning tasks, such as handwriting recognition, speech recognition, or time series prediction ~\cite{fischer2018deep}. Surprisingly, its application in financial area has yet been little and there has not been any previous attempt to deploy LSTM networks on a large, liquid, and survivor-bias-free stock universe to assess its performance in large-scale financial market prediction tasks ~\cite{fischer2018deep}. Unlike conventional RNN, LSTM is well-suited to learn from experience to predict time series when there are time steps with arbitrary size. In addition, it can solve the problem of a vanishing gradient by having the memory unit retain the time related information for an arbitrary amount of time ~\cite{how2016behavior}. Previous work has shown that LSTM is more effective than RNN. At the same time, WT is used to fix the noise feature of financial time series. We use it to denoise the input financial time series. We'll call this model \scheme\ hereafter ~\cite{bao2017deep}.
+
+We select S\&P500 Index for our experiments from the past 10 years, up until 2018 and use \scheme\ to forecast the movements of each stock index and check how well our model is performing in predicting stock moving trends. In the future, we hope to test the performance of the model in multiple financial markets instead of only one market for better results. This is because, according to the efficient market hypothesis (EMH), the efficiency of a market affects the predictability of its assets. In other words, even though we may achieve satisfactory predictive performances in one market, it is still difficult to attribute it to the role of the proposed model~\cite{bao2017deep} in other financial markets. Since we will eventually test the model in multiple market conditions, we hope it will help us to solve this problem and proves the robustness of the model. We evaluate the model's performance by measuring how predicted prices are numerically close to the actual prices. There are four possible ways to predict the accuracy: Mean absolute percentage error (MAPE), correlation coefficient (R), Theil's inequality coefficient (Theil U), Root Mean Square Error (RMSE) ~\cite{bao2017deep}. They are widely used to measure the predicted values ~\cite{hsieh2011forecasting}.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+%In Section ~\ref{sec-problem} we formalize the problem we are solving.  In Section ~\ref{sec-desc} we describe our solution to the problem.  Lessons learned are discussed in Section ~\ref{sec-lessons}.  Results are presented in Section ~\ref{sec-results} and comparisons made to related work in Section ~\ref{sec-rel}.  Finally, we draw conclusions in Section ~\ref{sec-conc}.
+
+%For a given gene, the neural 
+%network predicts properties such as how many functions might be common between this gene 
+%and the solution or what is
+
+%partly caused by the difficulty in finding appropriate fitness function. To overcome this %difficulty, this paper contributes with a novel approach 
+%%to design fitness functions, 
+%which is to use a neural network
+%as a fitness function. Based on this idea, we propose an evolutionary framework to synthesize %program. The framework, called ESP, contains three novel contributions. 
+%Among various machine learning
+%bases synthesis techniques, Neural Program Synthesis
+%techniques are particularly interesting because such
+%techniques can produce actual programs by conditioning a neural network with input-output examples~\cite{}.
+
+%Machine learning based program synthesis can be broadly categorized as Neural Program Induction techniques and Neural Program Synthesis technqiues. Neural Program Induction techniques~\cite{} strive to design a neural network that learns to produce outputs from a latent program representation. On the other hand

@@ -1,0 +1,158 @@
+\documentclass{article}
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2019
+
+% ready for submission
+%\usepackage{neurips_2019}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+\usepackage[preprint]{neurips_2019}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2019}
+
+% to avoid loading the natbib package, add option nonatbib: hjjhhhjhjhj
+%     \usepackage[nonatbib]{neurips_2019}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{comment}
+\usepackage{wrapfig}
+\usepackage[normalem]{ulem}
+\usepackage{times,amssymb,amsmath,amsfonts,openbib,multirow}
+\usepackage{comment}
+\usepackage{times}
+\usepackage{graphicx}
+%\usepackage{subfigure}
+\usepackage{subfig}
+\usepackage{setspace}
+\usepackage{afterpage}
+\usepackage{url}
+\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{listings}
+%\usepackage{amsthm}
+%\usepackage{cite}
+\usepackage{amsmath}
+%\usepackage{algorithm}
+%\usepackage{algorithmicx}
+%\usepackage[noend]{algpseudocode}
+\usepackage{xcolor}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
+\usepackage{authblk}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+\newcommand{\todo}[1]{{\color{red}\bf[[#1]]}}
+\newcommand{\scheme}{SPAL}
+
+\title{ \scheme: {\underline S}tock {\underline P}rices Forecast with  Stacked {\underline A}utoencoders and {\underline LSTM} 
+}
+%{\underline E}volutionary {\underline S}ynthesis of {\underline P}rograms}
+
+
+
+\author[]{Shantanu Mandal \thanks{shanto@tamu.edu}}
+\author[]{Jee Su Byun \thanks{jb733@tamu.edu}}
+\author[]{Zebo Xiong \thanks{dior@tamu.edu}}
+\affil[]{Texas A\&M University}
+\renewcommand\Authands{ and }
+
+\begin{document}
+
+\maketitle
+\input{abs}
+
+\section{Introduction}
+\label{sec-intro}
+\input{intro}
+
+\section{Problem Statement}
+\label{sec-problem}
+\input{problem.tex}
+
+\section{Overall Architecture}
+\label{sec-main}
+\input{desc.tex}
+
+%\section{Lessons Learned}
+%\label{sec-lessons}
+%\input{lessons.tex}
+
+\section{Results}
+\label{sec-results}
+\input{results.tex}
+
+\section{Related Work}
+\label{sec-rel}
+\input{rel.tex}
+
+\section{Future work}
+\label{sec-future}
+\input{future_plan.tex}
+
+%\section{Background}
+%\label{sec-back}
+%\input{back}
+
+
+%\section{\scheme: Root Cause Analysis}
+%\label{sec-desc}
+%\input{desc}
+
+
+%\section{Implementation}
+%\label{sec-impl}
+%\input{impl}
+
+
+%\section{Additional Issues}
+%\label{sec-additional}
+%\input{additional}
+
+
+%\section{Experimental Results}
+%\label{sec-results}
+%\input{results_new}
+
+%\section{Limitations and Future Work}
+%\label{sec-limit}
+%\input{limit}
+
+%\section{Related Work}
+%\label{sec-rel}
+%\input{rel}
+
+
+\section{Conclusion}
+\label{sec-conc}
+\input{conc}
+
+
+%\input{variance_term}
+
+%\bibliographystyle{plain}
+\bibliographystyle{abbrv}
+%\bibliographystyle{abbrvnat}
+%\bibliographystyle{ACM-Reference-Format}
+\bibliography{main}
+
+%\newpage
+%\appendix
+%\section{Appendix A: Our List DSL}
+%\label{sec-appendix-dsl}
+%\input{app-dsl.tex}
+
+%\section{Appendix B: System}
+%\label{sec-appendix-system}
+%\input{app-system.tex}
+
+\end{document}
